@@ -10,10 +10,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.udacity.firebase.shoppinglistplusplus.R;
 import com.udacity.firebase.shoppinglistplusplus.utils.Constants;
 
@@ -70,7 +71,7 @@ public class ShoppingListsFragment extends Fragment {
         /**
          * Create Firebase references
          */
-        Firebase refListName = new Firebase(Constants.FIREBASE_URL).child(Constants.FIREBASE_PROPERTY_LIST_NAME);
+        DatabaseReference refListName = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL).child(Constants.FIREBASE_PROPERTY_LIST_NAME);
 
         /**
          * Add ValueEventListeners to Firebase references
@@ -86,10 +87,11 @@ public class ShoppingListsFragment extends Fragment {
                 // Now take the TextView for the list name
                 // and set it's value to listName.
                 mTextViewListName.setText(listName);
+
             }
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
