@@ -13,7 +13,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.udacity.firebase.shoppinglistplusplus.R;
 import com.udacity.firebase.shoppinglistplusplus.utils.Constants;
 
@@ -91,8 +92,8 @@ public class AddListDialogFragment extends DialogFragment {
      * Add new active list
      */
     public void addShoppingList() {
-        // Get the reference to the root node in Firebase
-        Firebase ref = new Firebase(Constants.FIREBASE_URL);
+        // Get the reference to the root node in FirebaseDatabae
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(Constants.FIREBASE_URL);
         // Get the string that the user entered into the EditText
         String userEnteredName = mEditTextListName.getText().toString();
         // Go to the "listName" child node of the root node.
